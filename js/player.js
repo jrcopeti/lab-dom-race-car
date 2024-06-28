@@ -8,13 +8,13 @@ class Player {
     this.directionX = 0;
     this.directionY = 0;
     this.element = document.createElement("img");
+    
     this.element.src = imgSrc;
-
     this.element.style.position = "absolute";
-    this.element.style.left = `${this.left}px`;
-    this.element.style.top = `${this.top}px`;
-    this.element.style.width = `${this.width}px`;
-    this.element.style.height = `${this.height}px`;
+    this.element.style.width = `${width}px`;
+    this.element.style.height = `${height}px`;
+    this.element.style.left = `${left}px`;
+    this.element.style.top = `${top}px`;
 
     this.gameScreen.appendChild(this.element);
   }
@@ -46,5 +46,16 @@ class Player {
     const playerRect = this.element.getBoundingClientRect();
     const obstacleRect = obstacle.element.getBoundingClientRect();
     console.log(playerRect, obstacleRect);
+
+    if (
+      playerRect.left < obstacleRect.right &&
+      playerRect.right > obstacleRect.left &&
+      playerRect.top < obstacleRect.bottom &&
+      playerRect.bottom > obstacleRect.top
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
